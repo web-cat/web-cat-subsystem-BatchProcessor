@@ -108,7 +108,7 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
             }
 
             rewriteBatchProperties(info);
-            info.managedJob.setBatchState(info.currentState);
+            info.managedJob.setCurrentState(info.currentState);
             info.managedJob.saveChanges();
         }
 
@@ -163,7 +163,7 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
     protected void resetJob()
     {
         captureAdditionalSuspensionInfo(currentJob());
-        currentJob().setBatchState(BatchJob.STATE_START);
+        currentJob().setCurrentState(BatchJob.STATE_START);
     }
 
 
@@ -172,7 +172,7 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
     {
         StringBuffer buffer = new StringBuffer();
         buffer.append("State job was in when suspended: ");
-        buffer.append(job.batchState());
+        buffer.append(job.currentState());
         buffer.append("\n");
 
         lastSuspensionInfo = buffer.toString();
@@ -199,7 +199,7 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
         info.job = job;
         info.managedJob = managedJob;
         info.result = result;
-        info.currentState = managedJob.batchState();
+        info.currentState = managedJob.currentState();
 
         // Create the working directories for the batch job.
 
@@ -212,8 +212,11 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
         info.batchPropertiesFile = new File(result.resultDirName(),
                 BatchResult.propertiesFileName());
 
-        initializeBatchProperties(info);
-        rewriteBatchProperties(info);
+        if (BatchJob.STATE_START.equals(info.job.currentState()))
+        {
+            initializeBatchProperties(info);
+            rewriteBatchProperties(info);
+        }
 
         // Start the process.
 
@@ -262,9 +265,9 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
 
         String[] stateParts = info.currentState.split(":");
         info.currentState = stateParts[0];
-        info.stateAfterIteration = stateParts[1];
+        String stateAfterIteration = stateParts[1];
 
-        info.managedJob.prepareForIteration();
+        info.managedJob.prepareForIteration(stateAfterIteration);
     }
 
 
@@ -290,8 +293,7 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
 
         if (nextObject == null)
         {
-            info.currentState = info.stateAfterIteration;
-            info.managedJob.endIteration();
+            info.currentState = info.managedJob.endIteration();
         }
         else
         {
@@ -310,14 +312,12 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
                     // If there are no more objects to process, transition
                     // to the post-iteration state.
 
-                    info.currentState = info.stateAfterIteration;
-                    info.managedJob.endIteration();
+                    info.currentState = info.managedJob.endIteration();
                 }
             }
             else if ("break".equals(action))
             {
-                info.currentState = info.stateAfterIteration;
-                info.managedJob.endIteration();
+                info.currentState = info.managedJob.endIteration();
             }
             else if ("die".equals(action))
             {
@@ -372,7 +372,7 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
         // Only wipe and create the result directory if the job is starting
         // fresh.
 
-        if (BatchJob.STATE_START.equals(job.batchState()))
+        if (BatchJob.STATE_START.equals(job.currentState()))
         {
             File resultDir = new File(job.batchResult().resultDirName());
             if (resultDir.exists())
@@ -648,7 +648,7 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
 
         info.managedJob.setSuspensionReason(reason);
         info.managedJob.setIsReady(false);
-        info.managedJob.setBatchState(BatchJob.STATE_START);
+        info.managedJob.setCurrentState(BatchJob.STATE_START);
         info.managedJob.saveChanges();
         info.jobShouldDie = true;
     }
@@ -672,7 +672,6 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
         EOQualifier       qualifier;
         int               objectCount;
         ERXFetchSpecificationBatchIterator iterator;
-        String            stateAfterIteration;
 
         String            currentState;
         boolean           jobShouldDie;

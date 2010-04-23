@@ -153,7 +153,8 @@ public class BatchJob
         }
 
         NSArray remainder = pks.subarrayWithRange(
-                new NSRange(indexOfNextObject(), pks.count()));
+                new NSRange(indexOfNextObject(),
+                        pks.count() - indexOfNextObject()));
 
         ObjectQuery query = objectQuery();
         EOQualifier[] quals = QualifierUtils.partitionQualifier(

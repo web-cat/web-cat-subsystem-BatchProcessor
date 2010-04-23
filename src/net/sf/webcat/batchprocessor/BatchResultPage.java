@@ -25,6 +25,7 @@ import java.io.File;
 import net.sf.webcat.core.DeliverFile;
 import net.sf.webcat.core.EntityResourceRequestHandler;
 import net.sf.webcat.core.WCComponent;
+import net.sf.webcat.jobqueue.WCPageWithJobMonitoring;
 import net.sf.webcat.ui.util.ComponentIDGenerator;
 import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOContext;
@@ -39,6 +40,7 @@ import com.webobjects.foundation.NSArray;
  * @version $Id$
  */
 public class BatchResultPage extends WCComponent
+    implements WCPageWithJobMonitoring.Delegate
 {
     //~ Constructors ..........................................................
 
@@ -53,7 +55,6 @@ public class BatchResultPage extends WCComponent
 
     public BatchResult result;
     public BatchFeedbackSection feedbackSection;
-    public ComponentIDGenerator idFor;
 
 
     //~ Methods ...............................................................
@@ -61,9 +62,14 @@ public class BatchResultPage extends WCComponent
     // ----------------------------------------------------------
     public void appendToResponse(WOResponse response, WOContext context)
     {
-        idFor = new ComponentIDGenerator(this);
-
         super.appendToResponse(response, context);
+    }
+
+
+    // ----------------------------------------------------------
+    public BatchResultPage self()
+    {
+        return this;
     }
 
 
@@ -91,50 +97,9 @@ public class BatchResultPage extends WCComponent
 
 
     // ----------------------------------------------------------
-    public WOActionResults cancelJob()
+    public WOActionResults jobWasCancelled()
     {
-        BatchJob job = result.batchJob();
-
-        if (job != null)
-        {
-            job.setIsCancelled(true);
-            job.editingContext().saveChanges();
-
-            return pageWithName(PickBatchResultToViewPage.class);
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-
-    // ----------------------------------------------------------
-    public WOActionResults restartJob()
-    {
-        BatchJob job = result.batchJob();
-
-        if (job != null)
-        {
-            job.setIsReady(true);
-            job.editingContext().saveChanges();
-        }
-
-        return null;
-    }
-
-
-    // ----------------------------------------------------------
-    public WOActionResults downloadStderrFile()
-    {
-        File resultDir = new File(result.resultDirName());
-        File stderrFile = new File(resultDir, "stderr.txt");
-
-        DeliverFile deliver = pageWithName(DeliverFile.class);
-        deliver.setFileName(stderrFile);
-        deliver.setContentType("text/plain");
-
-        return deliver;
+        return pageWithName(PickBatchResultToViewPage.class);
     }
 
 

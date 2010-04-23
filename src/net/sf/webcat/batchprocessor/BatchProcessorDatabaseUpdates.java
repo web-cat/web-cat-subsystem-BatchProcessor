@@ -116,12 +116,13 @@ public class BatchProcessorDatabaseUpdates
                 + "batchedObjectIds BLOB , "
                 + "batchPluginId INTEGER , "
                 + "batchResultId INTEGER , "
-                + "batchState TINYTEXT , "
                 + "configSettings BLOB , "
+                + "currentState TINYTEXT , "
                 + "description MEDIUMTEXT , "
                 + "indexOfNextObject INTEGER , "
                 + "isInIteration BIT NOT NULL , "
                 + "objectQueryId INTEGER , "
+                + "stateAfterIteration TINYTEXT , "
                 + "CUPDATEMUTABLEFIELDS BIT NOT NULL"
                 + " )");
             database().executeSQL(

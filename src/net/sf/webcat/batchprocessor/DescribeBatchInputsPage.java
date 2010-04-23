@@ -109,7 +109,7 @@ public class DescribeBatchInputsPage extends WCComponent
         job.setDescription(desc);
         job.setUserRelationship(user());
         job.setBatchPluginRelationship(batchPlugin);
-        job.setBatchState(BatchJob.STATE_START);
+        job.setCurrentState(BatchJob.STATE_START);
         job.setObjectQueryRelationship(query);
 
         if (!configSettings.isEmpty())
