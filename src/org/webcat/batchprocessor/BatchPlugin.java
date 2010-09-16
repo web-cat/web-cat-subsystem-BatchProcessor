@@ -27,8 +27,8 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
-import org.webcat.FeatureDescriptor;
-import org.webcat.FeatureProvider;
+import net.sf.webcat.FeatureDescriptor;
+import net.sf.webcat.FeatureProvider;
 import org.webcat.core.Application;
 import org.webcat.core.MutableDictionary;
 import org.webcat.core.User;
@@ -390,7 +390,7 @@ public class BatchPlugin
      */
     public static String installOrUpdate(
         User                            installedBy,
-        org.webcat.FeatureDescriptor plugin,
+        net.sf.webcat.FeatureDescriptor plugin,
         boolean                         overwrite )
     {
         return installOrUpdate( installedBy, plugin, overwrite, null );
@@ -670,7 +670,7 @@ public class BatchPlugin
      */
     private static String installOrUpdate(
         User                            installedBy,
-        org.webcat.FeatureDescriptor plugin,
+        net.sf.webcat.FeatureDescriptor plugin,
         boolean                         overwrite,
         BatchPlugin                     batchPlugin )
     {
