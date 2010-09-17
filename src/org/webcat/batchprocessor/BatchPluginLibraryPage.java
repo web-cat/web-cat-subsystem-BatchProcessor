@@ -151,7 +151,7 @@ public class BatchPluginLibraryPage
      * Edit the selected plug-in's configuration settings.
      * @return the subsystem's edit page
      */
-    public WOComponent edit()
+    public WOComponent editGlobalSettings()
     {
         EditBatchPluginGlobalsPage newPage =
             pageWithName(EditBatchPluginGlobalsPage.class);
