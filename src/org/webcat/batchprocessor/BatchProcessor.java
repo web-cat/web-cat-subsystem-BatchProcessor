@@ -21,26 +21,18 @@
 
 package org.webcat.batchprocessor;
 
-import java.util.Hashtable;
-import java.util.Map;
 import org.apache.log4j.Logger;
-import org.webcat.core.Application;
 import org.webcat.core.EntityResourceRequestHandler;
 import org.webcat.core.Subsystem;
-import org.webcat.grader.EnqueuedJob;
-import org.webcat.grader.Grader;
 import org.webcat.jobqueue.QueueDescriptor;
-import com.webobjects.eocontrol.EOEditingContext;
-import com.webobjects.eocontrol.EOQualifier;
-import er.extensions.eof.ERXEOControlUtilities;
-import er.extensions.eof.ERXQ;
 
 //-------------------------------------------------------------------------
 /**
  * The primary class of the BatchProcessor subsystem.
  *
- * @author Tony Allevato
- * @version $Id$
+ * @author  Tony Allevato
+ * @author  Last changed by $Author$
+ * @version $Revision$, $Date$
  */
 public class BatchProcessor extends Subsystem
 {

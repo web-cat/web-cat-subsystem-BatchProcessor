@@ -30,7 +30,8 @@ import org.webcat.core.IEntityResourceHandler;
  * BatchResult entities through direct URLs.
  *
  * @author  Tony Allevato
- * @version $Id$
+ * @author  Last changed by $Author$
+ * @version $Revision$, $Date$
  */
 public class BatchResultResourceHandler
 implements IEntityResourceHandler<BatchResult>

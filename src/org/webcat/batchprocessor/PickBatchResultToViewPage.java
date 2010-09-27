@@ -26,10 +26,10 @@ import org.webcat.ui.generators.JavascriptGenerator;
 import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOComponent;
 import com.webobjects.appserver.WOContext;
-import com.webobjects.appserver.WODisplayGroup;
 import com.webobjects.appserver.WOResponse;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableDictionary;
+import er.extensions.appserver.ERXDisplayGroup;
 
 //-------------------------------------------------------------------------
 /**
@@ -37,7 +37,8 @@ import com.webobjects.foundation.NSMutableDictionary;
  * or view the progress of any jobs currently in the queue.
  *
  * @author  Tony Allevato
- * @version $Id$
+ * @author  Last changed by $Author$
+ * @version $Revision$, $Date$
  */
 public class PickBatchResultToViewPage extends WCComponent
 {
@@ -56,8 +57,8 @@ public class PickBatchResultToViewPage extends WCComponent
 
     //~ KVC Attributes (must be public) .......................................
 
-    public WODisplayGroup batchResultDisplayGroup;
-    public WODisplayGroup batchJobDisplayGroup;
+    public ERXDisplayGroup<BatchResult> batchResultDisplayGroup;
+    public ERXDisplayGroup<BatchJob>    batchJobDisplayGroup;
 
 
     //~ Methods ...............................................................
@@ -65,7 +66,7 @@ public class PickBatchResultToViewPage extends WCComponent
     // ----------------------------------------------------------
     public void appendToResponse(WOResponse response, WOContext context)
     {
-        NSMutableDictionary bindings;
+        NSMutableDictionary<?, ?> bindings;
 
         bindings = batchResultDisplayGroup.queryBindings();
         bindings.setObjectForKey(user(), "user");
@@ -82,8 +83,7 @@ public class PickBatchResultToViewPage extends WCComponent
     // ----------------------------------------------------------
     public WOComponent viewBatchResult()
     {
-        BatchResult result = (BatchResult)
-            batchResultDisplayGroup.selectedObject();
+        BatchResult result = batchResultDisplayGroup.selectedObject();
 
         if (result != null)
         {
@@ -121,7 +121,7 @@ public class PickBatchResultToViewPage extends WCComponent
     // ----------------------------------------------------------
     public WOComponent viewBatchProgress()
     {
-        BatchJob job = (BatchJob) batchJobDisplayGroup.selectedObject();
+        BatchJob job = batchJobDisplayGroup.selectedObject();
         BatchResult result = job.batchResult();
 
         if (result != null)

@@ -21,28 +21,19 @@
 
 package org.webcat.batchprocessor;
 
-import org.webcat.core.Course;
-import org.webcat.core.CourseOffering;
-import org.webcat.core.Department;
-import org.webcat.core.Semester;
 import org.webcat.core.WCComponent;
-import org.webcat.ui.AbstractTreeModel;
-import org.webcat.ui.util.WCTableLayoutBuilder;
 import com.webobjects.appserver.WOComponent;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WODisplayGroup;
-import com.webobjects.eocontrol.EOFetchSpecification;
-import com.webobjects.eocontrol.EOSortOrdering;
 import com.webobjects.foundation.NSArray;
-import com.webobjects.foundation.NSMutableArray;
-import er.extensions.eof.ERXS;
 
 //-------------------------------------------------------------------------
 /**
  * This page allows the user to select the batch plug-in that they want to run.
  *
- * @author Tony Allevato
- * @version $Id$
+ * @author  Tony Allevato
+ * @author  Last changed by $Author$
+ * @version $Revision$, $Date$
  */
 public class PickBatchPluginToRunPage extends WCComponent
 {

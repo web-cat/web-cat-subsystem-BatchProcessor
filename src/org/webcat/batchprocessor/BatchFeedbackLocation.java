@@ -26,7 +26,8 @@ package org.webcat.batchprocessor;
  * Describes the location of a batch feedback report among all reports.
  *
  * @author  Tony Allevato
- * @version $Id$
+ * @author  Last changed by $Author$
+ * @version $Revision$, $Date$
  */
 public enum BatchFeedbackLocation
 {

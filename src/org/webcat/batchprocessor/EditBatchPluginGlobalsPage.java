@@ -31,9 +31,9 @@ import com.webobjects.appserver.*;
  *  The creator of this page must set the plugin attribute before
  *  rendering the page.
  *
- *  @author Stephen Edwards
- * @author  latest changes by: $Author$
- * @version $Revision$, $Date$
+ *  @author  Stephen Edwards
+ *  @author  latest changes by: $Author$
+ *  @version $Revision$, $Date$
  */
 public class EditBatchPluginGlobalsPage extends WCComponent
 {
@@ -53,7 +53,7 @@ public class EditBatchPluginGlobalsPage extends WCComponent
 
     //~ KVC Attributes (must be public) .......................................
 
-    public BatchPlugin   plugin;
+    public BatchPlugin  plugin;
     public java.io.File baseDir;
 
 
@@ -62,18 +62,18 @@ public class EditBatchPluginGlobalsPage extends WCComponent
     // ----------------------------------------------------------
     public void appendToResponse(WOResponse response, WOContext context)
     {
-        log.debug( "appendToResponse()" );
-        if ( baseDir == null )
+        log.debug("appendToResponse()");
+        if (baseDir == null)
         {
-            baseDir = new java.io.File ( BatchPlugin.userPluginDirName(
-                user(), true ).toString() );
+            baseDir = new java.io.File (BatchPlugin.userPluginDirName(
+                user(), true).toString());
         }
-        if ( log.isDebugEnabled() )
+        if (log.isDebugEnabled())
         {
-            log.debug( "plug-in global settings =\n"
-                + plugin.globalConfigSettings() );
+            log.debug("plug-in global settings =\n"
+                + plugin.globalConfigSettings());
         }
-        super.appendToResponse( response, context );
+        super.appendToResponse(response, context);
     }
 
 

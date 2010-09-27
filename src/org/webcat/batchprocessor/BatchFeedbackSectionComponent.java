@@ -21,11 +21,9 @@
 
 package org.webcat.batchprocessor;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import org.apache.log4j.Logger;
-import org.webcat.core.FileUtilities;
 import org.webcat.core.WCComponent;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WOResponse;
@@ -36,7 +34,8 @@ import com.webobjects.foundation.NSData;
  * TODO real description
  *
  * @author  Tony Allevato
- * @version $Id$
+ * @author  Last changed by $Author$
+ * @version $Revision$, $Date$
  */
 public class BatchFeedbackSectionComponent extends WCComponent
 {

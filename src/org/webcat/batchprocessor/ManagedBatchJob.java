@@ -29,7 +29,8 @@ import com.webobjects.foundation.NSArray;
  * TODO real description
  *
  * @author  Tony Allevato
- * @version $Id$
+ * @author  Last changed by $Author$
+ * @version $Revision$, $Date$
  */
 public class ManagedBatchJob extends ManagedJobBase
 {
@@ -148,7 +149,8 @@ public class ManagedBatchJob extends ManagedJobBase
     public void incrementIndexOfNextObject()
     {
         int index = indexOfNextObject();
-        NSArray ids = (NSArray) valueForKey(BatchJob.BATCHED_OBJECT_IDS_KEY);
+        NSArray<?> ids =
+            (NSArray<?>)valueForKey(BatchJob.BATCHED_OBJECT_IDS_KEY);
 
         if (index < ids.count())
         {

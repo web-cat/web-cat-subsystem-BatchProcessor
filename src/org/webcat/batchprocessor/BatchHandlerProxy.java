@@ -23,11 +23,9 @@ package org.webcat.batchprocessor;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import org.apache.log4j.Logger;
 import org.webcat.core.WCProperties;
-import org.webcat.core.vfs.WCFile;
 import com.webobjects.eocontrol.EOEnterpriseObject;
 
 //-------------------------------------------------------------------------
@@ -36,8 +34,9 @@ import com.webobjects.eocontrol.EOEnterpriseObject;
  * handler, providing appropriate default behavior (usually no-ops) if the
  * handler does not implement a method.
  *
- * @author Tony Allevato
- * @version $Id$
+ * @author  Tony Allevato
+ * @author  Last changed by $Author$
+ * @version $Revision$, $Date$
  */
 public class BatchHandlerProxy
 {
@@ -54,7 +53,7 @@ public class BatchHandlerProxy
 
         try
         {
-            Constructor ctor =
+            Constructor<?> ctor =
                 BatchHandlerManager.getHandlerConstructor(handlerClass);
 
             handler = ctor.newInstance(properties, workingDir);

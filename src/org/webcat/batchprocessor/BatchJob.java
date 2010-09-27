@@ -26,9 +26,7 @@ import org.webcat.core.MutableArray;
 import org.webcat.core.ObjectQuery;
 import org.webcat.core.QualifierUtils;
 import com.webobjects.eocontrol.EOEditingContext;
-import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.eocontrol.EOFetchSpecification;
-import com.webobjects.eocontrol.EOGlobalID;
 import com.webobjects.eocontrol.EOQualifier;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSTimestamp;
@@ -39,8 +37,8 @@ import er.extensions.eof.ERXFetchSpecificationBatchIterator;
 /**
  * TODO: place a real description here.
  *
- * @author
- * @author  latest changes by: $Author$
+ * @author  Tony Allevato
+ * @author  Last changed by $Author$
  * @version $Revision$, $Date$
  */
 public class BatchJob
@@ -152,7 +150,7 @@ public class BatchJob
             return null;
         }
 
-        NSArray remainder = pks.subarrayWithRange(
+        NSArray<?> remainder = pks.subarrayWithRange(
                 new NSRange(indexOfNextObject(),
                         pks.count() - indexOfNextObject()));
 

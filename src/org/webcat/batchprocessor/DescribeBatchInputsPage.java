@@ -26,21 +26,19 @@ import org.webcat.core.MutableDictionary;
 import org.webcat.core.ObjectQuery;
 import org.webcat.core.WCComponent;
 import org.webcat.core.objectquery.ObjectQuerySurrogate;
-import org.webcat.grader.GradingPlugin;
-import org.webcat.grader.Submission;
 import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WOResponse;
 import com.webobjects.eocontrol.EOEditingContext;
-import com.webobjects.foundation.NSArray;
 
 //-------------------------------------------------------------------------
 /**
  * This page allows the user to select the items for the batch job and any
  * other arguments that the plug-in needs to run.
  *
- * @author Tony Allevato
- * @version $Id$
+ * @author  Tony Allevato
+ * @author  Last changed by $Author$
+ * @version $Revision$, $Date$
  */
 public class DescribeBatchInputsPage extends WCComponent
 {

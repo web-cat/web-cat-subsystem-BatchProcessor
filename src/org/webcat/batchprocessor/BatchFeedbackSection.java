@@ -22,7 +22,6 @@
 package org.webcat.batchprocessor;
 
 import java.io.File;
-import org.webcat.core.User;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSComparator;
 import com.webobjects.foundation.NSMutableArray;
@@ -32,8 +31,8 @@ import com.webobjects.foundation.NSComparator.ComparisonException;
 /**
  * TODO: place a real description here.
  *
- * @author
- * @author  latest changes by: $Author$
+ * @author  Tony Allevato
+ * @author  Last changed by $Author$
  * @version $Revision$, $Date$
  */
 public class BatchFeedbackSection

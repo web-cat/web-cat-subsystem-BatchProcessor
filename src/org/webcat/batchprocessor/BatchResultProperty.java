@@ -25,7 +25,7 @@ package org.webcat.batchprocessor;
 /**
  * TODO: place a real description here.
  *
- * @author
+ * @author  Tony Allevato
  * @author  latest changes by: $Author$
  * @version $Revision$, $Date$
  */
@@ -42,8 +42,4 @@ public class BatchResultProperty
     {
         super();
     }
-
-
-    //~ Methods ...............................................................
-
 }

@@ -34,9 +34,6 @@ import org.webcat.core.Application;
 import org.webcat.core.FileUtilities;
 import org.webcat.core.MutableDictionary;
 import org.webcat.core.WCProperties;
-import org.webcat.grader.EnqueuedJob;
-import org.webcat.grader.ResultOutcome;
-import org.webcat.grader.SubmissionResult;
 import org.webcat.jobqueue.WorkerThread;
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOEnterpriseObject;
@@ -506,7 +503,10 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
         }
         else
         {
-            contents = (NSDictionary<String, Object>) value;
+            @SuppressWarnings("unchecked")
+            NSDictionary<String, Object> theContents =
+                (NSDictionary<String, Object>) value;
+            contents = theContents;
         }
 
         BatchResultProperty resultProp = BatchResultProperty.create(

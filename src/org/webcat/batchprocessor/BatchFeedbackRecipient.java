@@ -26,7 +26,8 @@ package org.webcat.batchprocessor;
  * Describes which users are allowed to see a batch feedback report.
  *
  * @author  Tony Allevato
- * @version $Id$
+ * @author  Last changed by $Author$
+ * @version $Revision$, $Date$
  */
 public enum BatchFeedbackRecipient
 {

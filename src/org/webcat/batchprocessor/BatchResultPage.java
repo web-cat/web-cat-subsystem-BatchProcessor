@@ -21,12 +21,9 @@
 
 package org.webcat.batchprocessor;
 
-import java.io.File;
-import org.webcat.core.DeliverFile;
 import org.webcat.core.EntityResourceRequestHandler;
 import org.webcat.core.WCComponent;
 import org.webcat.jobqueue.WCPageWithJobMonitoring;
-import org.webcat.ui.util.ComponentIDGenerator;
 import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WOResponse;
@@ -37,7 +34,8 @@ import com.webobjects.foundation.NSArray;
  * Displays the results of a batch job.
  *
  * @author  Tony Allevato
- * @version $Id$
+ * @author  Last changed by $Author$
+ * @version $Revision$, $Date$
  */
 public class BatchResultPage extends WCComponent
     implements WCPageWithJobMonitoring.Delegate

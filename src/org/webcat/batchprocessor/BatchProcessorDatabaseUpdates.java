@@ -24,7 +24,6 @@ package org.webcat.batchprocessor;
 import java.sql.SQLException;
 import org.apache.log4j.Logger;
 import org.webcat.dbupdate.UpdateSet;
-import org.webcat.jobqueue.JobQueueDatabaseUpdates;
 
 //-------------------------------------------------------------------------
 /**
@@ -32,8 +31,9 @@ import org.webcat.jobqueue.JobQueueDatabaseUpdates;
  * underlying the BatchProcessor subsystem and the BatchProcessor.eomodeld.
  * Logging output for this class uses its parent class' logger.
  *
- * @author Tony Allevato
- * @version $Id$
+ * @author  Tony Allevato
+ * @author  Last changed by $Author$
+ * @version $Revision$, $Date$
  */
 public class BatchProcessorDatabaseUpdates
     extends UpdateSet

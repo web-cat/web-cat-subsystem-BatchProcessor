@@ -31,7 +31,8 @@ import com.webobjects.appserver.WOContext;
  * an indicator of whether it is suspended.
  *
  * @author  Tony Allevato
- * @version $Id$
+ * @author  Last changed by $Author$
+ * @version $Revision$, $Date$
  */
 public class BatchJobDescriptionCell extends WCTableCell
 {
