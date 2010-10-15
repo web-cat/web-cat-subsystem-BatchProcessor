@@ -392,8 +392,7 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
 
         // Re-write the properties file
         properties.addPropertiesFromDictionaryIfNotDefined(
-            ((Application) Application.application())
-                .subsystemManager().pluginProperties());
+            Application.wcApplication().subsystemManager().pluginProperties());
 
         properties.addPropertiesFromDictionaryIfNotDefined(
                 batchPlugin.globalConfigSettings());
@@ -408,7 +407,7 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
         properties.setProperty("scriptHome", batchPlugin.dirName());
         properties.setProperty("scriptData", BatchPlugin.pluginDataRoot());
         properties.setProperty("frameworksBaseURL",
-            Application.application().frameworksBaseURL());
+            Application.wcApplication().frameworksBaseURL());
     }
 
 

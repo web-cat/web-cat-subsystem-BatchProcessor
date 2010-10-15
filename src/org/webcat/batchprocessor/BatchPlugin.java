@@ -184,8 +184,8 @@ public class BatchPlugin
             command = command + " " + args;
         }
 
-        Application application = (Application) Application.application();
-        return application.executeExternalCommandAsync(command, cwd);
+        return Application.wcApplication().executeExternalCommandAsync(
+            command, cwd);
     }
 
 

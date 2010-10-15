@@ -85,9 +85,8 @@ public class BatchHandlerManager
     {
         handlers = new NSMutableDictionary<String, Class<?>>();
 
-        Application application = (Application) Application.application();
-
-        SubsystemManager subsystemManager = application.subsystemManager();
+        SubsystemManager subsystemManager =
+            Application.wcApplication().subsystemManager();
         for (Subsystem subsystem : subsystemManager.subsystems())
         {
             try
