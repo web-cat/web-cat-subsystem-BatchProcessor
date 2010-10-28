@@ -26,6 +26,7 @@ import com.webobjects.appserver.WOComponent;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WODisplayGroup;
 import com.webobjects.foundation.NSArray;
+import er.extensions.appserver.ERXDisplayGroup;
 
 //-------------------------------------------------------------------------
 /**
@@ -52,7 +53,8 @@ public class PickBatchPluginToRunPage extends WCComponent
 
     //~ KVC Attributes (must be public) .......................................
 
-    public WODisplayGroup pluginsDisplayGroup;
+    public ERXDisplayGroup<BatchPlugin> pluginsDisplayGroup;
+    public BatchPlugin batchPlugin;
 
 
     //~ Methods ...............................................................
@@ -65,7 +67,7 @@ public class PickBatchPluginToRunPage extends WCComponent
             NSArray<BatchPlugin> batchPlugins =
                 BatchPlugin.pluginsAccessibleByUser(localContext(), user());
 
-            pluginsDisplayGroup = new WODisplayGroup();
+            pluginsDisplayGroup = new ERXDisplayGroup<BatchPlugin>();
             pluginsDisplayGroup.setObjectArray(batchPlugins);
         }
 
@@ -76,9 +78,6 @@ public class PickBatchPluginToRunPage extends WCComponent
     // ----------------------------------------------------------
     public WOComponent pluginChosen()
     {
-        BatchPlugin batchPlugin =
-            (BatchPlugin) pluginsDisplayGroup.selectedObject();
-
         DescribeBatchInputsPage page =
             pageWithName(DescribeBatchInputsPage.class);
 

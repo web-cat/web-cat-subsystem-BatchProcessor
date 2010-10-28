@@ -60,6 +60,9 @@ public class PickBatchResultToViewPage extends WCComponent
     public ERXDisplayGroup<BatchResult> batchResultDisplayGroup;
     public ERXDisplayGroup<BatchJob>    batchJobDisplayGroup;
 
+    public BatchResult batchResult;
+    public BatchJob batchJob;
+
 
     //~ Methods ...............................................................
 
@@ -83,12 +86,10 @@ public class PickBatchResultToViewPage extends WCComponent
     // ----------------------------------------------------------
     public WOComponent viewBatchResult()
     {
-        BatchResult result = batchResultDisplayGroup.selectedObject();
-
-        if (result != null)
+        if (batchResult != null)
         {
             BatchResultPage page = pageWithName(BatchResultPage.class);
-            page.result = result;
+            page.result = batchResult;
             return page;
         }
         else
@@ -121,8 +122,7 @@ public class PickBatchResultToViewPage extends WCComponent
     // ----------------------------------------------------------
     public WOComponent viewBatchProgress()
     {
-        BatchJob job = batchJobDisplayGroup.selectedObject();
-        BatchResult result = job.batchResult();
+        BatchResult result = batchJob.batchResult();
 
         if (result != null)
         {
