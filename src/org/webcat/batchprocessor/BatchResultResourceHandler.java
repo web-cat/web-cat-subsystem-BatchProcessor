@@ -22,7 +22,7 @@
 package org.webcat.batchprocessor;
 
 import java.io.File;
-import org.webcat.core.IEntityResourceHandler;
+import org.webcat.core.EntityResourceHandler;
 
 //-------------------------------------------------------------------------
 /**
@@ -34,7 +34,7 @@ import org.webcat.core.IEntityResourceHandler;
  * @version $Revision$, $Date$
  */
 public class BatchResultResourceHandler
-implements IEntityResourceHandler<BatchResult>
+    extends EntityResourceHandler<BatchResult>
 {
     //~ Methods ...............................................................
 
@@ -43,4 +43,7 @@ implements IEntityResourceHandler<BatchResult>
     {
         return new File(object.resultDir(), relativePath);
     }
+
+
+    // TODO add requirements for log-in and user permissions
 }
