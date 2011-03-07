@@ -41,7 +41,14 @@ public class BatchResultResourceHandler
     // ----------------------------------------------------------
     public File pathForResource(BatchResult object, String relativePath)
     {
-        return new File(object.resultDir(), relativePath);
+        if (relativePath == null)
+        {
+            return object.resultDir();
+        }
+        else
+        {
+            return new File(object.resultDir(), relativePath);
+        }
     }
 
 
