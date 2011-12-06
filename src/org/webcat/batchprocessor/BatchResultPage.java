@@ -101,6 +101,20 @@ public class BatchResultPage extends WCComponent
     }
 
 
+    // ----------------------------------------------------------
+    public boolean feedbackSectionIsOpen()
+    {
+        return !feedbackSection.isCollapsed();
+    }
+
+
+    // ----------------------------------------------------------
+    public void setFeedbackSectionIsOpen(boolean value)
+    {
+        // ignore set calls ... just for KVC compliance.
+    }
+
+
     //~ Static/instance variables .............................................
 
     private NSArray<BatchFeedbackSection> cachedFeedbackSections;

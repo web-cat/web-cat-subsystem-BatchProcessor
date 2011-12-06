@@ -408,6 +408,16 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
         properties.setProperty("scriptData", BatchPlugin.pluginDataRoot());
         properties.setProperty("frameworksBaseURL",
             Application.wcApplication().frameworksBaseURL());
+        System.out.println("initializeBatchProperties():\n--------------------");
+        try
+        {
+            info.batchProperties.store(System.out, "Properties contents:");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        System.out.println("--------------------\n");
     }
 
 
@@ -416,13 +426,26 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
     {
         info.batchProperties.clear();
         info.batchProperties.load(info.batchPropertiesFile.getAbsolutePath());
+        System.out.println("reloadBatchProperties():\n--------------------");
+        try
+        {
+            info.batchProperties.store(System.out, "Properties contents:");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        System.out.println("--------------------\n");
     }
 
 
     // ----------------------------------------------------------
     private void rewriteBatchProperties(JobInfo info)
-    throws IOException
+        throws IOException
     {
+        System.out.println("rewriteBatchProperties():\n--------------------");
+        info.batchProperties.store(System.out, "Properties contents:");
+        System.out.println("--------------------\n");
         BufferedOutputStream out = new BufferedOutputStream(
                 new FileOutputStream(info.batchPropertiesFile));
         info.batchProperties.store(out,
