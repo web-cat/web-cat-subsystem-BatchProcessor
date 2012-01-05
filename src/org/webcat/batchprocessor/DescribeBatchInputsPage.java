@@ -1,7 +1,7 @@
 /*==========================================================================*\
  |  $Id$
  |*-------------------------------------------------------------------------*|
- |  Copyright (C) 2006-2008 Virginia Tech
+ |  Copyright (C) 2010-2012 Virginia Tech
  |
  |  This file is part of Web-CAT.
  |
@@ -60,7 +60,6 @@ public class DescribeBatchInputsPage extends WCComponent
 
     public BatchPlugin batchPlugin;
     public MutableDictionary configSettings;
-    public String jobDescription;
     public File baseDir;
 
     public ObjectQuerySurrogate objectQuerySurrogate;
@@ -92,14 +91,11 @@ public class DescribeBatchInputsPage extends WCComponent
         ObjectQuery query = objectQuerySurrogate.commitAndGetQuery(ec, user());
         applyLocalChanges();
 
-        String desc;
-        if (jobDescription == null || jobDescription.length() == 0)
+        String desc = batchPlugin.displayableName();
+        String extra = query.description();
+        if (extra != null)
         {
-            desc = batchPlugin.name();
-        }
-        else
-        {
-            desc = jobDescription;
+            desc += ": " + extra;
         }
 
         BatchJob job = BatchJob.create(ec);

@@ -1,7 +1,7 @@
 /*==========================================================================*\
  |  $Id$
  |*-------------------------------------------------------------------------*|
- |  Copyright (C) 2010 Virginia Tech
+ |  Copyright (C) 2010-2012 Virginia Tech
  |
  |  This file is part of Web-CAT.
  |
@@ -85,12 +85,18 @@ public class BatchResultPage extends WCComponent
 
 
     // ----------------------------------------------------------
+    public String feedbackSectionBaseURL()
+    {
+        return EntityResourceRequestHandler.urlForEntityResource(
+                context(), result, null);
+    }
+
+
+    // ----------------------------------------------------------
     public String feedbackSectionResourceURL()
     {
-        String filename = feedbackSection.fileName();
-
         return EntityResourceRequestHandler.urlForEntityResource(
-                context(), result, filename);
+                context(), result, feedbackSection.fileName());
     }
 
 

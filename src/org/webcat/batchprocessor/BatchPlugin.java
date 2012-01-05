@@ -1,7 +1,7 @@
 /*==========================================================================*\
  |  $Id$
  |*-------------------------------------------------------------------------*|
- |  Copyright (C) 2006-2011 Virginia Tech
+ |  Copyright (C) 2010-2012 Virginia Tech
  |
  |  This file is part of Web-CAT.
  |
@@ -629,15 +629,11 @@ public class BatchPlugin
             return allPluginsOrderedByName(ec);
         }
 
-        NSArray<BatchPlugin> userPlugins = pluginsForUser(ec, user);
-        NSArray<BatchPlugin> publishedPlugins = publishedPlugins(ec);
-
         NSMutableArray<BatchPlugin> allPlugins =
-            new NSMutableArray<BatchPlugin>();
+            publishedPlugins(ec).mutableClone();
 
-        allPlugins.addObjectsFromArray(userPlugins);
         ERXArrayUtilities.addObjectsFromArrayWithoutDuplicates(
-            allPlugins, publishedPlugins);
+            allPlugins, pluginsForUser(ec, user));
 
         ERXArrayUtilities.sortArrayWithKey(allPlugins, BatchPlugin.NAME_KEY);
 

@@ -1,7 +1,7 @@
 /*==========================================================================*\
  |  $Id$
  |*-------------------------------------------------------------------------*|
- |  Copyright (C) 2006-2009 Virginia Tech
+ |  Copyright (C) 2010-2012 Virginia Tech
  |
  |  This file is part of Web-CAT.
  |
@@ -98,6 +98,16 @@ public class BatchJob
 
 
     // ----------------------------------------------------------
+    @Override
+    public String userPresentableDescription()
+    {
+        return "BatchJob(" + description() + ")[" + id() + "] for " + user()
+            + ": state = " + stateAfterIteration() + "; ready = " + isReady()
+            + "; cancelled = " + isCancelled();
+    }
+
+
+    // ----------------------------------------------------------
     /**
      * Retrieve the name of the directory where this submission is stored.
      *
@@ -163,5 +173,52 @@ public class BatchJob
 
         return new ERXFetchSpecificationBatchIterator(fspec, remainder, ec,
                     ERXFetchSpecificationBatchIterator.DefaultBatchSize);
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * Prepares this job to iterate over a batch of entities.
+     *
+     * @param stateAfter the state that the job should transition into
+     *     after the iteration is complete
+     */
+    public void prepareForIteration(String stateAfter)
+    {
+        setIndexOfNextObject(0);
+        setIsInIteration(true);
+        setStateAfterIteration(stateAfter);
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * Ends the current iteration and returns the next state for the job.
+     *
+     * @return the next state for the job
+     */
+    public String endIteration()
+    {
+        String nextState = stateAfterIteration();
+        setIsInIteration(false);
+        setStateAfterIteration(null);
+
+        return nextState;
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * Increments the next object index.
+     */
+    public void incrementIndexOfNextObject()
+    {
+        int index = indexOfNextObject();
+        NSArray<?> ids = batchedObjectIds();
+
+        if (index < ids.count())
+        {
+            setIndexOfNextObject(index + 1);
+        }
     }
 }
