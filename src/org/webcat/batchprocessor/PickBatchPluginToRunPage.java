@@ -340,8 +340,7 @@ public class PickBatchPluginToRunPage
                 }
             }
         }
-        NSArray<BatchPlugin> exclude =
-            pluginsDisplayGroup.displayedObjects();
+        NSArray<BatchPlugin> exclude = BatchPlugin.allObjects(localContext());
         if (exclude != null)
         {
             for (BatchPlugin s : exclude)
