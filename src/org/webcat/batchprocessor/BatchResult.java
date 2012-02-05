@@ -99,6 +99,18 @@ public class BatchResult
 
 
     // ----------------------------------------------------------
+    /**
+     * Provided as a KVC-mirror to {@link #batchJob()}.  It simply calls
+     * {@link #addToBatchJobsRelationship(BatchJob)}.
+     * @param job The job to add.
+     */
+    public void setBatchJob(BatchJob job)
+    {
+        addToBatchJobsRelationship(job);
+    }
+
+
+    // ----------------------------------------------------------
     public String resultDirName()
     {
         StringBuffer dir = new StringBuffer(50);
