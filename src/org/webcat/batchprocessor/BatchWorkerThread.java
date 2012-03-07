@@ -209,10 +209,15 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
         info.batchPropertiesFile = new File(result.resultDirName(),
                 BatchResult.propertiesFileName());
 
-        if (BatchJob.STATE_START.equals(info.job.currentState()))
+        if (BatchJob.STATE_START.equals(info.job.currentState())
+            || !info.batchPropertiesFile.exists())
         {
             initializeBatchProperties(info);
             rewriteBatchProperties(info);
+        }
+        else
+        {
+            reloadBatchProperties(info);
         }
 
         // Start the process.
@@ -409,7 +414,9 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
         properties.setProperty("workingDir", job.workingDirName());
         properties.setProperty("resultDir", job.batchResult().resultDirName());
         properties.setProperty("scriptHome", batchPlugin.dirName());
+        properties.setProperty("pluginHome", batchPlugin.dirName());
         properties.setProperty("scriptData", BatchPlugin.pluginDataRoot());
+        properties.setProperty("pluginData", BatchPlugin.pluginDataRoot());
         properties.setProperty("frameworksBaseURL",
             Application.wcApplication().frameworksBaseURL());
         if (log.isDebugEnabled())
