@@ -26,6 +26,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import net.sf.webcat.FeatureDescriptor;
 import net.sf.webcat.FeatureProvider;
 import org.webcat.core.Application;
@@ -862,20 +863,37 @@ public class BatchPlugin
                 FeatureDescriptor fd = s.descriptor().providerVersion();
                 if (fd != null)
                 {
-                    availablePlugins.remove(fd);
+                    if (availablePlugins.size() > 0
+                        && !availablePlugins.remove(fd))
+                    {
+                        Iterator<FeatureDescriptor> available =
+                            availablePlugins.iterator();
+                        while (available.hasNext())
+                        {
+                            FeatureDescriptor candidate = available.next();
+                            if (candidate.name() == null
+                                || candidate.name().equals(fd.name()))
+                            {
+                                available.remove();
+                            }
+                        }
+                    }
                 }
             }
         }
         for (FeatureDescriptor plugin : availablePlugins)
         {
-            log.info("Installing new plug-in: \"" + plugin.name() + "\"");
-            String msg = installOrUpdate(admin, plugin, false, null);
-            if (msg != null)
+            if (plugin.getProperty("batchEntity") != null)
             {
-                log.error("Error installing new plug-in \""
-                    + plugin.name() + "\": " + msg);
+                log.info("Installing new plug-in: \"" + plugin.name() + "\"");
+                String msg = installOrUpdate(admin, plugin, false, null);
+                if (msg != null)
+                {
+                    log.error("Error installing new plug-in \""
+                        + plugin.name() + "\": " + msg);
+                }
+                ec.saveChanges();
             }
-            ec.saveChanges();
         }
     }
 
