@@ -32,6 +32,7 @@ import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import org.apache.log4j.Logger;
 import org.webcat.core.Application;
+import org.webcat.core.EOBase;
 import org.webcat.core.FileUtilities;
 import org.webcat.core.MutableDictionary;
 import org.webcat.core.WCProperties;
@@ -244,7 +245,8 @@ public class BatchWorkerThread extends WorkerThread<BatchJob>
 
         // Get an iterator that points to the current item in the batch.
 
-        info.qualifier = job.objectQuery().qualifier();
+        info.qualifier = EOBase.accessibleBy(job.user()).and(
+            job.objectQuery().qualifier());
         info.objectCount = job.objectQuery().upperBoundOfObjectCount();
         info.iterator = job.iteratorForRemainingItems(localContext());
 
